@@ -15,11 +15,11 @@ app.use("/public/assets", express.static(__dirname + "/public/assets"));
 
 // HTML routes for index
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "./Develop/public/index.html"));
+    res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 // HTML routes for notes
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 // API for notes to get, save, and delete notes.
@@ -38,7 +38,7 @@ app.post('/api/notes', (req, res) => {
     newNote.id = uniqueId;
     data.push(newNote);
 
-    fs.writeFileSync('./db/db.json', JSON.stringify(data), function(err) {
+    fs.writeFileSync('./Develop/db/db.json', JSON.stringify(data), function(err) {
         if (err) throw (err);
     });
 
@@ -56,7 +56,7 @@ app.delete("/api/notes/:id", (req, res) => {
         currentNote.id = newId.toString();
         newId++;
     }
-    fs.writeFileSync("./db/db.json", JSON.stringify(data));
+    fs.writeFileSync("./Develop/db/db.json", JSON.stringify(data));
     res.json(data);
 });
 // start the server
